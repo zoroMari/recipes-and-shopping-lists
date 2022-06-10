@@ -10,9 +10,7 @@ export class ShoppingListService {
   startedEditing = new Subject<number>();
 
   private _ingredients: Ingredient[] = [
-    new Ingredient('Eggs', 6),
-    new Ingredient('Ladyfingers', 40),
-    new Ingredient('Mascarpone(pacc)', 2)
+
   ];
 
   get getIngredients() {
@@ -40,6 +38,11 @@ export class ShoppingListService {
 
   deleteIngredient(index: number) {
     this._ingredients.splice(index, 1)
+    this.ingredientsChanged.next(this.getIngredients);
+  }
+
+  setShopList(newIngredients: Ingredient[]) {
+    this._ingredients = newIngredients;
     this.ingredientsChanged.next(this.getIngredients);
   }
 }

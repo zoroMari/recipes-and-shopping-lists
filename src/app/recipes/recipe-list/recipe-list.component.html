@@ -8,7 +8,10 @@
 
 <div class="row">
   <div class="col-xs-12">
+    <p *ngIf="recipes.length === 0">You have not any recipes yet</p>
+
     <app-recipe-item
+      class="recipeItem"
       *ngFor="let recipe of recipes; let i = index"
       [index]="i"
       [recipeItem]="recipe"
