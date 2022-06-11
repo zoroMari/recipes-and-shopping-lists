@@ -43,6 +43,7 @@
             class="btn btn-primary"
             type="button"
             (click)="handleClearForm()"
+            [disabled]="!amountInput.value && !nameInput.value"
             >
             Clear
           </button>
