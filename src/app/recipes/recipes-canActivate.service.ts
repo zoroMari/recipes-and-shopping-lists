@@ -11,7 +11,7 @@ export class CanActivateService implements CanActivate {
     private _recipesService: RecipesService,
   ) {}
 
-  canActivate(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+  public canActivate(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (this._recipesService.getRecipes.length !== 0) {
       return true
     } else {

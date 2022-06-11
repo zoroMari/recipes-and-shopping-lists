@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alert.service';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Ingredient } from 'src/app/shared/ingredients.model';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
@@ -19,6 +21,9 @@ export class RecipeEditComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _recipesService: RecipesService,
+    private _dataStorageService: DataStorageService,
+    private _alertService: AlertService,
+
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +77,7 @@ export class RecipeEditComponent implements OnInit {
     return (<FormArray>this.recipeForm.get('ingredients')).controls;
   }
 
-  handleAddIngredient() {
+  public handleAddIngredient() {
     let control: FormGroup = new FormGroup({
       'name': new FormControl(null, Validators.required),
       'amount': new FormControl(null, [
@@ -83,25 +88,29 @@ export class RecipeEditComponent implements OnInit {
     (<FormArray>this.recipeForm.get('ingredients')).push(control);
   }
 
-  handleSubmit() {
+  public handleSubmit() {
     if (this.editMode) {
       this._recipesService.updateRecipe(this.id, this.recipeForm.value);
     } else {
       this._recipesService.addRecipe(this.recipeForm.value);
     }
 
+
+    this._dataStorageService.storeRecipes();
+    this._alertService.show('Recipes were saved!');
+
     this._router.navigate(['../'], {relativeTo: this._route});
   }
 
-  handleCancelEditing() {
+  public handleCancelEditing() {
     this._router.navigate(['../'], {relativeTo: this._route});
   }
 
-  handleDeleteIngredient(indexOfIngredient: number) {
+  public handleDeleteIngredient(indexOfIngredient: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(indexOfIngredient);
   }
 
-  handleDeleteAllIngredient() {
+  public handleDeleteAllIngredient() {
     (<FormArray>this.recipeForm.get('ingredients')).clear();
   }
 

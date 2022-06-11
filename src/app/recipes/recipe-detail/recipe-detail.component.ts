@@ -5,6 +5,7 @@ import { RecipesService } from '../recipes.service';
 import { AlertService } from '../../shared/alert.service';
 import { ModalService } from 'src/app/shared/modal.service';
 import { Subscription } from 'rxjs';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -22,6 +23,7 @@ export class RecipeDetailComponent implements OnInit {
     private _router: Router,
     private readonly _alertService: AlertService,
     private readonly _modalService: ModalService,
+    private _dataStorageService: DataStorageService,
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +62,7 @@ export class RecipeDetailComponent implements OnInit {
 
   private _deleteRecipe() {
     this._recipesService.deleteRecipe(this.id);
+    this._dataStorageService.storeRecipes();
     this._router.navigate(['../'], {relativeTo: this._route})
   }
 

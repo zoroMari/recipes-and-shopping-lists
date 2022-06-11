@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AlertService } from 'src/app/shared/alert.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
@@ -12,13 +11,12 @@ import { RecipesService } from '../recipes.service';
   styleUrls: ['./recipe-list.component.sass']
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
-  recipes: Recipe[];
-  subscription: Subscription;
+  public recipes: Recipe[];
+  private _subscription: Subscription;
 
   constructor(
     private _recipeService: RecipesService,
     private _dataStorageService: DataStorageService,
-    private _alertService: AlertService,
     private _router: Router,
     private _route: ActivatedRoute,
   ) { }
@@ -27,7 +25,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.recipes = this._recipeService.getRecipes;
 
-    this.subscription = this._recipeService.recipesChanged.subscribe(
+    this._subscription = this._recipeService.recipesChanged.subscribe(
       (recipes: Recipe[]) => {
         this.recipes = recipes;
       }
@@ -42,20 +40,11 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   }
 
-  handleAddNewRecipe() {
+  public handleAddNewRecipe() {
     this._router.navigate(['new'], { relativeTo: this._route });
   }
 
-  handleSaveData() {
-    this._dataStorageService.storeRecipes();
-    this._alertService.show('Recipes were saved!');
-  }
-
-  handleFetchData() {
-    this._dataStorageService.fetchRecipes();
-  }
-
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this._subscription.unsubscribe();
   }
 }

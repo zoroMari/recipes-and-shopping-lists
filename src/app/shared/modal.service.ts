@@ -6,16 +6,16 @@ export class ModalService {
   public modalDisplay = 'none';
   public deleteData = new Subject<boolean>();
 
-  openModal() {
+  public openModal() {
     this.modalDisplay = 'block';
   }
 
-  confirmModal() {
+  public confirmModal() {
     this.modalDisplay = 'none';
     this.deleteData.next(true);
   }
 
-  cancelModal() {
+  public cancelModal() {
     this.modalDisplay = 'none';
     this.deleteData.next(false);
   }

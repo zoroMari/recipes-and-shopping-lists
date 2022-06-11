@@ -49,14 +49,14 @@ export class ShoppingEditComponent implements OnInit {
     form.reset();
   }
 
-  handleDeleteIngredient() {
+  public handleDeleteIngredient() {
     this._shoppingListService.deleteIngredient(this._editItemIndex);
 
     this.editMode = false;
     this.slForm.reset();
   }
 
-  handleClearForm() {
+  public handleClearForm() {
     this.slForm.reset();
     this.editMode = false;
   }
