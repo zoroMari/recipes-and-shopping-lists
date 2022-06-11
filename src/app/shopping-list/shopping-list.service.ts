@@ -20,8 +20,8 @@ export class ShoppingListService {
   }
 
   public addIngredient(ingredient: Ingredient) {
-   this._ingredients.push(ingredient);
-   this.ingredientsChanged.next(this.getIngredients);
+    this._ingredients.push(ingredient);
+    this.ingredientsChanged.next(this.getIngredients);
   }
 
   public addIngredients(ingredients: Ingredient[]) {
@@ -43,4 +43,8 @@ export class ShoppingListService {
     this._ingredients = newIngredients;
     this.ingredientsChanged.next(this.getIngredients);
   }
+
+  private _firstLetterToUpperCase(word: string) {
+    return word[0].toUpperCase() + word.slice(1);
+   }
 }
