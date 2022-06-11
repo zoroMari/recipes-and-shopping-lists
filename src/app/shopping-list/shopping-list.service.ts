@@ -7,13 +7,9 @@ import { Ingredient } from "../shared/ingredients.model";
 @Injectable({ providedIn: 'root' })
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
-  startedEditing = new Subject<number>();
+  idForStarteEditing = new Subject<number>();
 
-  private _ingredients: Ingredient[] = [
-    new Ingredient('Eggs', 6),
-    new Ingredient('Ladyfingers', 40),
-    new Ingredient('Mascarpone(pacc)', 2)
-  ];
+  private _ingredients: Ingredient[] = [];
 
   get getIngredients() {
     return this._ingredients.slice();
@@ -40,6 +36,11 @@ export class ShoppingListService {
 
   deleteIngredient(index: number) {
     this._ingredients.splice(index, 1)
+    this.ingredientsChanged.next(this.getIngredients);
+  }
+
+  setShopList(newIngredients: Ingredient[]) {
+    this._ingredients = newIngredients;
     this.ingredientsChanged.next(this.getIngredients);
   }
 }

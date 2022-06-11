@@ -1,5 +1,8 @@
 <div class="row">
   <div class="col-xs-12">
+    <h2 *ngIf="editMode">Edit recipe</h2>
+    <h2 *ngIf="!editMode">Add recipe</h2>
+
     <form [formGroup]="recipeForm" (ngSubmit)="handleSubmit()">
       <div class="row">
         <div class="col-xs-12">
@@ -101,7 +104,9 @@
                 [formGroupName]="i"
               >
                 <div class="col-xs-8">
+                  <label for="ingredientName">Name</label>
                   <input
+                    id="ingredientName"
                     type="text"
                     class="form-control"
                     formControlName="name"
@@ -109,7 +114,9 @@
                 </div>
 
                 <div class="col-xs-3">
+                  <label for="ingredientAmount">Amount</label>
                   <input
+                    id="ingredientAmount"
                     type="number"
                     class="form-control"
                     formControlName="amount"

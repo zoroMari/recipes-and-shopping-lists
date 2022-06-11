@@ -8,28 +8,11 @@ import { Recipe } from "./recipe.model";
 export class RecipesService {
   public recipesChanged = new Subject<Recipe[]>();
 
-  constructor(private _shoppingListService: ShoppingListService) {}
+  constructor(
+    private _shoppingListService: ShoppingListService,
+  ) {}
 
-  private _recipes: Recipe[] = [
-    new Recipe(
-      'Tiramisu',
-      'Some description here',
-      'https://cdn.pixabay.com/photo/2017/03/19/18/22/italian-food-2157246_1280.jpg',
-      [
-        new Ingredient('Eggs', 5),
-        new Ingredient('Eggs', 5),
-      ],
-    ),
-    new Recipe(
-      'Lasagna',
-      'Some description here',
-      'https://www.maxpixel.net/static/photo/1x/Meal-Lasagna-Pasta-Sauce-Cheese-Meat-Food-Slice-5981242.jpg',
-      [
-        new Ingredient('Meat', 500),
-        new Ingredient('Pasta', 200),
-      ],
-      ),
-  ];
+  private _recipes: Recipe[] = [];
 
   get getRecipes() {
     return this._recipes.slice();
@@ -37,6 +20,11 @@ export class RecipesService {
 
   public getRecipeByIndex(index: number) {
     return this._recipes[index];
+  }
+
+  public setRecipes(recipes: Recipe[]) {
+    this._recipes = recipes;
+    this.recipesChanged.next(this.getRecipes);
   }
 
   public findRecipeByName(name: string) {

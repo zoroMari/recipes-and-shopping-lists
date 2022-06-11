@@ -1,14 +1,19 @@
 <div class="row">
   <div class="col-xs-12">
     <button class="btn btn-success" (click)="handleAddNewRecipe()">New Recipe</button>
+    <button class="btn btn-primary" (click)="handleSaveData()">Save Recipes</button>
+    <button class="btn btn-secondary" (click)="handleFetchData()">Fetch Recipes</button>
   </div>
 </div>
 
 <hr>
 
-<div class="row">
+<div class="row recipes">
   <div class="col-xs-12">
+    <p *ngIf="recipes.length === 0">You have not any recipes yet</p>
+
     <app-recipe-item
+      class="recipeItem"
       *ngFor="let recipe of recipes; let i = index"
       [index]="i"
       [recipeItem]="recipe"
