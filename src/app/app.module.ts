@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -10,12 +13,10 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DropdownDirective } from './shared/dropdown.directive';
-import { AppRoutingModule } from './app-routing.module';
 import { RecipeDetailDefaultComponent } from './recipes/recipe-detail/recipe-detail-default/recipe-detail-default.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipesService } from './recipes/recipes.service';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 
 @NgModule({
@@ -28,9 +29,9 @@ import { RecipesService } from './recipes/recipes.service';
     RecipeListComponent,
     RecipeItemComponent,
     RecipeDetailComponent,
-    DropdownDirective,
     RecipeDetailDefaultComponent,
     RecipeEditComponent,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,

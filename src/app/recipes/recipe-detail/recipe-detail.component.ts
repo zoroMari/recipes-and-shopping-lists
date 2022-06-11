@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
@@ -25,7 +25,6 @@ export class RecipeDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this._sub = this._route.params
       .subscribe(
         (params: Params) => {

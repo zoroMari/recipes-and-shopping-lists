@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/ingredients.model';
@@ -19,7 +19,7 @@ export class ShoppingEditComponent implements OnInit {
   constructor(private _shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
-    this._subscription = this._shoppingListService.startedEditing
+    this._subscription = this._shoppingListService.idForStarteEditing
       .subscribe(
         (index: number) => {
           this.editMode = true;

@@ -7,11 +7,9 @@ import { Ingredient } from "../shared/ingredients.model";
 @Injectable({ providedIn: 'root' })
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
-  startedEditing = new Subject<number>();
+  idForStarteEditing = new Subject<number>();
 
-  private _ingredients: Ingredient[] = [
-
-  ];
+  private _ingredients: Ingredient[] = [];
 
   get getIngredients() {
     return this._ingredients.slice();

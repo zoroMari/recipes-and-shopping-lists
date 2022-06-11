@@ -17,10 +17,7 @@ export class DataStorageService {
   ) {}
 
   public storeRecipes() {
-    let recipes: Recipe[] =
-      this._recipeService.getRecipes.length >= 1
-        ? this._recipeService.getRecipes
-        : [];
+    let recipes: Recipe[] = this._recipeService.getRecipes;
 
     this._http.put(
       'https://recipe-book-43f49-default-rtdb.firebaseio.com/recipes.json',
@@ -59,10 +56,7 @@ export class DataStorageService {
   }
 
   public storeShoppingList() {
-    let shopList: Ingredient[] =
-      this._shoppingListService.getIngredients.length >= 1
-        ? this._shoppingListService.getIngredients
-        : [];
+    const shopList: Ingredient[] = this._shoppingListService.getIngredients;
 
     this._http.put(
       'https://shopping-list-b6021-default-rtdb.firebaseio.com/shoppingList.json',

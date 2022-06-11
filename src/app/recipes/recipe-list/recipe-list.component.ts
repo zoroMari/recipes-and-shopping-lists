@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/shared/alert.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
@@ -17,8 +18,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   constructor(
     private _recipeService: RecipesService,
     private _dataStorageService: DataStorageService,
+    private _alertService: AlertService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
   ) { }
 
 
@@ -38,11 +40,19 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         } else this.recipes = [];
       });
 
-
   }
 
   handleAddNewRecipe() {
     this._router.navigate(['new'], { relativeTo: this._route });
+  }
+
+  handleSaveData() {
+    this._dataStorageService.storeRecipes();
+    this._alertService.show('Recipes were saved!');
+  }
+
+  handleFetchData() {
+    this._dataStorageService.fetchRecipes();
   }
 
   ngOnDestroy(): void {
