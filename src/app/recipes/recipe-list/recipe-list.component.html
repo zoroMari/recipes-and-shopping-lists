@@ -8,7 +8,9 @@
 
 <div class="row recipes">
   <div class="col-xs-12">
-    <p *ngIf="recipes.length === 0">You have not any recipes yet</p>
+    <p *ngIf="loading">...Loading</p>
+
+    <p *ngIf="recipes.length === 0 && !loading">You have not any recipes yet</p>
 
     <app-recipe-item
       class="recipeItem"

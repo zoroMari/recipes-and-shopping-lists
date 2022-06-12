@@ -13,6 +13,7 @@ import { RecipesService } from '../recipes.service';
 export class RecipeListComponent implements OnInit, OnDestroy {
   public recipes: Recipe[];
   private _subscription: Subscription;
+  public loading: boolean = false;
 
   constructor(
     private _recipeService: RecipesService,
@@ -23,6 +24,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.loading = true;
+
     this.recipes = this._recipeService.getRecipes;
 
     this._subscription = this._recipeService.recipesChanged.subscribe(
@@ -33,11 +36,14 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
     this._dataStorageService.fetchRecipes()
       .subscribe((recipes: Recipe[]) => {
+
+        this.loading = false;
+
         if (recipes) {
           this.recipes = recipes;
         } else this.recipes = [];
-      });
 
+      });
   }
 
   public handleAddNewRecipe() {
