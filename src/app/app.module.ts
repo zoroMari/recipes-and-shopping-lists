@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 
+import { RecipesService } from './recipes/recipes.service';
+import { DropdownDirective } from './shared/dropdown.directive';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
@@ -15,8 +17,10 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeDetailDefaultComponent } from './recipes/recipe-detail/recipe-detail-default/recipe-detail-default.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipesService } from './recipes/recipes.service';
-import { DropdownDirective } from './shared/dropdown.directive';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from './auth/auth.interceptor.service';
+
 
 
 @NgModule({
@@ -31,6 +35,8 @@ import { DropdownDirective } from './shared/dropdown.directive';
     RecipeDetailComponent,
     RecipeDetailDefaultComponent,
     RecipeEditComponent,
+    AuthComponent,
+    LoadingSpinnerComponent,
     DropdownDirective,
   ],
   imports: [
@@ -40,7 +46,14 @@ import { DropdownDirective } from './shared/dropdown.directive';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [RecipesService],
+  providers: [
+    RecipesService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

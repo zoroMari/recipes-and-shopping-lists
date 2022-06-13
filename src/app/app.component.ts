@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from './recipes/recipes.service';
+import { AuthService } from './auth/auth.service';
 import { AlertService } from './shared/alert.service';
 import { ModalService } from './shared/modal.service';
 
@@ -12,10 +12,13 @@ export class AppComponent implements OnInit {
   constructor(
     public readonly alertService: AlertService,
     public readonly modalService: ModalService,
+    private _authService: AuthService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._authService.autoLogin();
+  }
 
-  
+
 
 }

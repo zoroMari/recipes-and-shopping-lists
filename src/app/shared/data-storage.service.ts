@@ -1,7 +1,8 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { map, tap } from "rxjs/operators";
+import { map, tap, take, exhaustMap } from "rxjs/operators";
+import { AuthService } from "../auth/auth.service";
 import { Recipe } from "../recipes/recipe.model";
 import { RecipesService } from "../recipes/recipes.service";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
@@ -14,6 +15,7 @@ export class DataStorageService {
     private _router: Router,
     private _recipeService: RecipesService,
     private _shoppingListService: ShoppingListService,
+    private _authService: AuthService,
   ) {}
 
   public storeRecipes() {
@@ -32,27 +34,28 @@ export class DataStorageService {
       .get<Recipe[]>(
         'https://recipe-book-43f49-default-rtdb.firebaseio.com/recipes.json'
       ).pipe(
-          map(
-            recipes => {
-              if (recipes) {
-                return recipes.map(item => {
-                  return {
-                    ...item,
-                    ingredients: item.ingredients ? item.ingredients : []
-                  };
-                });
-              } else return;
-            }
-          ),
-          tap(
-            recipes => {
-              if (recipes) {
-                this._recipeService.setRecipes(recipes);
-                this._router.navigate(['/recipes'])
-              } else return;
-            }
-          )
-        )
+        map(
+          recipes => {
+            if (recipes) {
+              return recipes.map(item => {
+                return {
+                  ...item,
+                  ingredients: item.ingredients ? item.ingredients : []
+                };
+              });
+            } else return;
+          }
+        ),
+        tap(
+          recipes => {
+            if (recipes) {
+              this._recipeService.setRecipes(recipes);
+              this._router.navigate(['/recipes'])
+            } else return;
+          }
+        ),
+      );
+
   }
 
   public storeShoppingList() {
