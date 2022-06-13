@@ -9,12 +9,33 @@
 
     <div class="navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true">
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active"><a routerLink="/recipes">Recipes</a></li>
-        <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping List</a></li>
+        <li routerLinkActive="active">
+          <a routerLink="/recipes" *ngIf="isAuthenticated">
+            Recipes
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="/shopping-list">
+            Shopping List
+          </a>
+        </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li routerLinkActive="active"><a routerLink="/auth">Authenticate</a></li>
+        <li routerLinkActive="active">
+          <a routerLink="/auth" *ngIf="!isAuthenticated">
+            Log In
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a
+            style="cursor: pointer;"
+            *ngIf="isAuthenticated"
+            (click)="_authService.logout()"
+          >
+            Log Out
+          </a>
+        </li>
       </ul>
 
       <!-- <ul class="nav navbar-nav navbar-right">

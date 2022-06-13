@@ -14,6 +14,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   public recipes: Recipe[];
   private _subscription: Subscription;
   public loading: boolean = false;
+  public error: string;
 
   constructor(
     private _recipeService: RecipesService,
@@ -35,14 +36,14 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     )
 
     this._dataStorageService.fetchRecipes()
-      .subscribe((recipes: Recipe[]) => {
+      .subscribe(
+        (recipes: Recipe[]) => {
 
-        this.loading = false;
+          this.loading = false;
 
-        if (recipes) {
-          this.recipes = recipes;
-        } else this.recipes = [];
-
+          if (recipes) {
+            this.recipes = recipes;
+          } else this.recipes = [];
       });
   }
 
