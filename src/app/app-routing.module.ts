@@ -7,10 +7,11 @@ import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.com
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
 import { CanActivateService } from "./recipes/recipes-canActivate.service";
 import { RecipesComponent } from "./recipes/recipes.component";
+import { NotFoundPageComponent } from "./shared/not-found-page/not-found-page.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/auth', pathMatch: 'full' },
+  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   { path: 'recipes', component: RecipesComponent, children: [
     {
       path: '',
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
   ] },
   { path: 'shopping-list', component: ShoppingListComponent },
   { path: 'auth', component: AuthComponent },
+  { path: '**', component: NotFoundPageComponent },
 ]
 
 @NgModule({
