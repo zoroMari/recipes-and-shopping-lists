@@ -23,6 +23,7 @@ import { AuthInterceptorService } from './auth/auth.interceptor.service';
 import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { ModalComponent } from './shared/modal/modal.component';
+import { ViewContainerDirective } from './shared/view-container.directive';
 
 
 
@@ -44,6 +45,7 @@ import { ModalComponent } from './shared/modal/modal.component';
     AlertComponent,
     ModalComponent,
     DropdownDirective,
+    ViewContainerDirective,
   ],
   imports: [
     BrowserModule,
