@@ -1,3 +1,11 @@
+<app-modal
+  *ngIf="openModal"
+  title="Delete recipe"
+  message="Do you really want to delete this recipe?"
+  (deleteData)="handleCloserModal($event)"
+>
+</app-modal>
+
 <div class="row">
   <div class="col-xs-12">
     <img

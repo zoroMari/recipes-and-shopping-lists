@@ -6,41 +6,6 @@
   {{ alertService.text }}
 </div>
 
-<div
-  class="modal"
-  tabindex="-1"
-  role="dialog"
-  [ngStyle]="{'display': modalService.modalDisplay}"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Delete recipe</h4>
-      </div>
-      <div class="modal-body">
-        <p>Do you realy want to delete this recipe?</p>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-danger"
-          (click)="modalService.confirmModal()"
-        >
-          Delete
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="modalService.cancelModal()"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <app-header></app-header>
 
 <div class="container">

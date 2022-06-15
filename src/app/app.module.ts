@@ -21,6 +21,9 @@ import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth.interceptor.service';
 import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { ModalComponent } from './shared/modal/modal.component';
+import { ViewContainerDirective } from './shared/view-container.directive';
 
 
 
@@ -39,7 +42,10 @@ import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.co
     AuthComponent,
     LoadingSpinnerComponent,
     NotFoundPageComponent,
+    AlertComponent,
+    ModalComponent,
     DropdownDirective,
+    ViewContainerDirective,
   ],
   imports: [
     BrowserModule,
