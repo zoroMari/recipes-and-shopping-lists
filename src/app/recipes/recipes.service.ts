@@ -4,7 +4,7 @@ import { Ingredient } from "../shared/ingredients.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
 import { Recipe } from "./recipe.model";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class RecipesService {
   public recipesChanged = new Subject<Recipe[]>();
 
