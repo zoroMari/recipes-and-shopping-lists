@@ -80,6 +80,8 @@ export class AuthComponent implements OnDestroy{
   }
 
   ngOnDestroy(): void {
+    if (this._closeSub) {
       this._closeSub.unsubscribe();
+    }
   }
 }
