@@ -19,7 +19,7 @@ For styling I used Bootstrap.
 During developing of this project I worked with such features: 
 - create Components
 - create and use Attribute and Structural Directives
-- create and use Services and Dependency Injection (Cross component communicaton)
+- create and use Services and Dependency Injection (Cross component communication)
 - add Routing and work with Quarry Parameters, Redirections, Guards etc
 - work with RxJS (Observables, Operators)
 - use Pipes to transform Output
