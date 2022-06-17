@@ -1,15 +1,21 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { NotFoundPageComponent } from "./shared/not-found-page/not-found-page.component";
-import { RecipesModule } from './recipes/recipes.module';
-import { ShoppingListModule } from "./shopping-list/shopping-list.module";
-import { AuthModule } from "./auth/auth.module";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'recipes', pathMatch: 'full' },
-  { path: 'recipes', loadChildren: () => RecipesModule },
-  { path: 'shopping-list', loadChildren: () => ShoppingListModule },
-  { path: 'auth', loadChildren: () => AuthModule },
+  {
+    path: 'recipes',
+    loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesModule)
+  },
+  {
+    path: 'shopping-list',
+    loadChildren: () => import('./shopping-list/shopping-list.module').then(m => m.ShoppingListModule),
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
   { path: '**', component: NotFoundPageComponent },
 ]
 
