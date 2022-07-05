@@ -29,15 +29,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       )
 
     this._dataStorageService.fetchShoppingList()
-        .subscribe(
-          (ingredients => {
-            if (ingredients) {
-              this.ingredients = ingredients;
-            } else {
-              this.ingredients = [];
-            }
-          })
-        )
   }
 
   public handleEditItem(index: number) {

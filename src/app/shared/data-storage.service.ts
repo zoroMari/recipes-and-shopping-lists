@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { map, tap, take, exhaustMap } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { AuthService } from "../auth/auth.service";
 import { Recipe } from "../recipes/recipe.model";
 import { RecipesService } from "../recipes/recipes.service";
@@ -15,7 +15,6 @@ export class DataStorageService {
     private _router: Router,
     private _recipeService: RecipesService,
     private _shoppingListService: ShoppingListService,
-    private _authService: AuthService,
   ) {}
 
   public storeRecipes() {
@@ -61,27 +60,15 @@ export class DataStorageService {
   public storeShoppingList() {
     const shopList: Ingredient[] = this._shoppingListService.getIngredients;
 
-    this._http.put(
-      'https://shopping-list-b6021-default-rtdb.firebaseio.com/shoppingList.json',
-      shopList
-    ).subscribe(
-      response => {}
-    )
+    localStorage.setItem('shopList', JSON.stringify(shopList));
   }
 
   public fetchShoppingList() {
-    return this._http
-      .get<Ingredient[]>(
-        'https://shopping-list-b6021-default-rtdb.firebaseio.com/shoppingList.json'
-      ).pipe(
-        tap(
-          ingredients => {
-            if(ingredients) {
-              this._shoppingListService.setShopList(ingredients);
-            } else return
-          }
-        )
-      )
+    const ingredients: Ingredient[] = JSON.parse(localStorage.getItem('shopList'));
+    if (ingredients) {
+      this._shoppingListService.setShopList(ingredients);
+    }
+
   }
 
 }
